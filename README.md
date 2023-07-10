@@ -9,12 +9,14 @@ Construction de l'infrastructure avec terraform
    - gcp registry 
    - cluster de qualification et de pré-production 
    - cloudSQL (instance test)
+   - dns
 
 Rédaction des descripteurs Kubernetes pour les microservices en environnement de qualification
    - deploiement
    - service
    - réseau 
- 
+
+
 Mise en place de la CI/CD en environnement de qualification 
 
 
@@ -25,7 +27,8 @@ Evaluation des ressources nécessaires au projet
 Rédaction des descripteurs Kubernetes pour les microservices en environnement de pré-production et de production:
    - deploiement
    - service
-   - réseau 
+   - réseau
+   - dns
 
 Mise en place de la CI/CD en environnement de pré-production
 
