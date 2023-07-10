@@ -32,13 +32,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: 'Google auth'
-        id: 'auth'
-        uses: 'google-github-actions/auth@v1'
-        with:
-            create_credentials_file: 'false'
-            workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
-            service_account: '${{ secrets.WIF_SERVICE_ACCOUNT }}'
+    #   - name: 'Google auth'
+    #     id: 'auth'
+    #     uses: 'google-github-actions/auth@v1'
+    #     with:
+    #         create_credentials_file: 'false'
+    #         workload_identity_provider: '{{ secrets.WIF_PROVIDER }}'
+    #         service_account: '{{ secrets.WIF_SERVICE_ACCOUNT }}'
 
       - name: 'Authenticate to Google Cloud'
         id: auth2
