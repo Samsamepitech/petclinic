@@ -27,7 +27,7 @@ spec:
         - -Djava.security.egd=file:/dev/./urandom
         - -jar
         - /app.jar
-        image: mszarlinski/spring-petclinic-admin-server
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/admin-server:latest
         name: admin-server
         ports:
         - containerPort: 9090
