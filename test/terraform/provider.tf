@@ -15,6 +15,6 @@ provider "google" {
 #   backend "gcs" {
 #     bucket      = "samsambucket"
 #     prefix      = "terraform"
-#     credentials =  "taibi-samira-b2411ac21c59.json"
+#     credentials =  ""
 #   }
 # }
