@@ -13,7 +13,7 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     env:
-      TF_VAR_bucket_name: 'samsambucket'
+      TF_VAR_bucket_name: 'samstorage1'
       TF_VAR_project_id: 'taibi-samira' # your project id
       TF_VAR_region: 'europe-west1'
       TF_VAR_zone: 'europe-west1-b'
@@ -77,3 +77,11 @@ jobs:
         id: tf_apply
         working-directory: ./test/terraform
         run: terraform apply -auto-approve
+
+    #   - name: Terraform Destroy
+    #     # If any commit message in your push or the HEAD commit of your PR 
+    #     # contains the strings [detruire] -- then terraform Destry step will run
+    #     if: "contains(github.event.commits[0].message, '[destroy]')"
+    #     # terraform plan -destroy
+    #     run: |
+    #         terraform apply -destroy -auto-approve
