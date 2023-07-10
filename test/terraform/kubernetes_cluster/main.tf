@@ -115,7 +115,7 @@ resource "google_container_node_pool" "app_cluster_linux_node_pool" {
   }
 
   upgrade_settings {
-    max_surge       = 100
+    max_surge       = 10
     max_unavailable = 10
   }
 }
