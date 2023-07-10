@@ -2,10 +2,8 @@
 
 # Plan de travail
 
-![schema](https://github.com/Samsamepitech/petclinic/assets/98088041/dd91c94e-0768-4b1e-b360-36628c125d2d)
-
-
 # Lundi 
+Dimmensionnement de l'environnement de qualification
 
 Construction de l'infrastructure avec terraform
    - gcp registry 
