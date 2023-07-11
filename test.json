@@ -1,0 +1,15 @@
+{                         
+    "apiVersion": "v1",
+    "data": {
+        ".dockerconfigjson": "eyJhdXRocyI6eyJldXJvcGUtd2VzdDEtZG9ja2VyLnBrZy5kZXYiOnsidXNlcm5hbWUiOiJfanNvbl9rZXkiLCJwYXNzd29yZCI6IiQoY2F0IGdjci1qc29uLWtleSkiLCJhdXRoIjoiWDJwemIyNWZhMlY1T2lRb1kyRjBJR2RqY2kxcWMyOXVMV3RsZVNrPSJ9fX0="
+    },
+    "kind": "Secret",
+    "metadata": {
+        "creationTimestamp": "2023-07-11T06:15:10Z",
+        "name": "gcr-json-key",
+        "namespace": "default",
+        "resourceVersion": "637318",
+        "uid": "b7678e0d-4cd1-4934-a668-c35ed17228fe"
+    },
+    "type": "kubernetes.io/dockerconfigjson"
+}

@@ -1,24 +1,26 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.2.0 (99f88ef)
   creationTimestamp: null
   labels:
-    io.kompose.service: config-server
+    service: config-server
   name: config-server
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      service: config-server
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: config-server
+        service: config-server
     spec:
+      imagePullSecrets: 
+        - name: gcr-json-key
       containers:
-      - image: mszarlinski/spring-petclinic-config-server
+      - image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-config-server:latest
         name: config-server
         ports:
         - containerPort: 8888

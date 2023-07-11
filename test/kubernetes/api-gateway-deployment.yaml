@@ -1,36 +1,29 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.2.0 (99f88ef)
   creationTimestamp: null
   labels:
-    io.kompose.service: api-gateway
+    service: api-gateway
   name: api-gateway
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      service: api-gateway
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: api-gateway
+        service: api-gateway
     spec:
+      imagePullSecrets: 
+        - name: gcr-json-key
       containers:
-      - command:
-        - ./wait-for-it.sh
-        - discovery-server:8761
-        - --timeout=60
-        - --
-        - java
-        - -Djava.security.egd=file:/dev/./urandom
-        - -jar
-        - /app.jar
-        image: mszarlinski/spring-petclinic-api-gateway
-        name: api-gateway
-        ports:
-        - containerPort: 8080
-        resources: {}
+        - image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-api-gateway:latest
+          name: api-gateway
+          ports:
+          - containerPort: 8080
+          resources: {}
       restartPolicy: Always
 status: {}

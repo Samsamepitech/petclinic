@@ -1,33 +1,26 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.2.0 (99f88ef)
-  creationTimestamp: null
   labels:
-    io.kompose.service: vets-service
+    service: vets-service
   name: vets-service
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      service: vets-service
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: vets-service
+        service: vets-service
     spec:
+      imagePullSecrets: 
+        - name: gcr-json-key
       containers:
       - command:
-        - ./wait-for-it.sh
-        - discovery-server:8761
-        - --timeout=60
-        - --
-        - java
-        - -Djava.security.egd=file:/dev/./urandom
-        - -jar
-        - /app.jar
-        image: mszarlinski/spring-petclinic-vets-service
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-vets-service:latest
         name: vets-service
         ports:
         - containerPort: 8083
