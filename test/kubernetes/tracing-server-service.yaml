@@ -6,6 +6,7 @@ metadata:
     service: tracing-server
   name: tracing-server
 spec:
+  type: LoadBalancer
   ports:
   - name: "9411"
     port: 9411

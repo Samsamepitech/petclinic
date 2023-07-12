@@ -1,5 +1,5 @@
-resource "google_container_cluster" "app_cluster" {
-  name     = "app-cluster"
+resource "google_container_cluster" "app_cluster_preprod" {
+  name     = "app-cluster-preprod"
   location = var.region
 
   # We can't create a cluster with no node pool defined, but we want to only use

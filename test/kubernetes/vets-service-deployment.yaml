@@ -31,8 +31,8 @@ spec:
         env:
         # - name: SPRING_PROFILES_ACTIVE
         #   value: docker,mysql, kubernetes
-        - name: SPRING_DATASOURCE_URL
-          value: "jdbc:mysql://db:3306/petclinic_config_server?useSSL=false"
+        # - name: SPRING_DATASOURCE_URL
+        #   value: "jdbc:mysql://db:3306/petclinic_config_server?useSSL=false"
         - name: management.endpoint.health.show-details
           value: Always
         # - name: DB_USER

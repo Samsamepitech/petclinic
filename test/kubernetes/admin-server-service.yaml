@@ -6,6 +6,7 @@ metadata:
     service: admin-server
   name: admin-server
 spec:
+  type: LoadBalancer
   ports:
   - name: "9090"
     port: 9090

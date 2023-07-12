@@ -6,6 +6,7 @@ metadata:
     service: discovery-server
   name: discovery-server
 spec:
+  type: LoadBalancer
   ports:
   - name: "8761"
     port: 8761

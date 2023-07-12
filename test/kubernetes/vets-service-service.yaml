@@ -6,6 +6,7 @@ metadata:
     service: vets-service
   name: vets-service
 spec:
+  type: LoadBalancer
   ports:
   - name: "8083"
     port: 8083
