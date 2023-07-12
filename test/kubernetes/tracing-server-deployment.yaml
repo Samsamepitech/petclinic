@@ -23,8 +23,43 @@ spec:
       - command:
         image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/openzipkin/zipkin:latest
         name: tracing-server
+        env:
+          - name: JAVA_OPTS
+            value: -XX:+UnlockExperimentalVMOptions -Djava.security.egd=file:/dev/./urandom
         ports:
         - containerPort: 9411
         resources: {}
       restartPolicy: Always
 status: {}
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: hpa-trcaing-server
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: tracing-server
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50
+
+---
+
+# apiVersion: keda.sh/v1alpha1
+# kind: ScaledObject
+# metadata:
+#   name: cron
+# spec:
+#   scaleTargetRef:
+#     name: tracing-server
+#   triggers:
+#   - type: cron
+#     metadata:
+#       timezone: Europe/Paris
+#       start: 0 8 * * *
+#       end: 0 19 * * *
+#       desiredReplicas: "1"

@@ -22,8 +22,43 @@ spec:
       containers:
       - image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-config-server:latest
         name: config-server
+        env:
+          - name: SPRING_DATASOURCE_URL
+            value: "jdbc:mysql://db:3306/petclinic?user=spring&password=spring&useUnicode=true&characterEncoding=UTF-8"
         ports:
         - containerPort: 8888
         resources: {}
       restartPolicy: Always
 status: {}
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: hpa-config-server
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: config-server
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50
+
+---
+
+# apiVersion: keda.sh/v1alpha1
+# kind: ScaledObject
+# metadata:
+#   name: cron
+# spec:
+#   scaleTargetRef:
+#     name: config-server
+#   triggers:
+#   - type: cron
+#     metadata:
+#       timezone: Europe/Paris
+#       start: 0 8 * * *
+#       end: 0 19 * * *
+#       desiredReplicas: "1"

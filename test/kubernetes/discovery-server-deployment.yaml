@@ -21,6 +21,12 @@ spec:
         - name: gcr-json-key
       containers:
       - command:
+          - ./dockerize
+          - -wait=tcp://config-server:8888
+          - -timeout=60s
+          - --
+          - java
+          - org.springframework.boot.loader.JarLauncher
         image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-discovery-server:latest
         name: discovery-server
         ports:
@@ -28,3 +34,35 @@ spec:
         resources: {}
       restartPolicy: Always
 status: {}
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: hpa-discovery-server
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: discovery-server
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50
+
+---
+
+# apiVersion: keda.sh/v1alpha1
+# kind: ScaledObject
+# metadata:
+#   name: cron
+# spec:
+#   scaleTargetRef:
+#     name: discovery-server
+#   triggers:
+#   - type: cron
+#     metadata:
+#       timezone: Europe/Paris
+#       start: 0 8 * * *
+#       end: 0 19 * * *
+#       desiredReplicas: "1"

@@ -20,11 +20,102 @@ spec:
       imagePullSecrets: 
         - name: gcr-json-key
       containers:
-      - command:
+      - name: customers-service
         image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-customers-service:latest
-        name: customers-service
+        command:
+          - ./dockerize
+          - -wait=tcp://discovery-server:8761
+          - -timeout=120s
+          - --
+          - java
+          - org.springframework.boot.loader.JarLauncher
+        env:
+        # - name: SPRING_PROFILES_ACTIVE
+        #   value: docker,mysql,kubernetes
+        - name: management.endpoint.health.show-details
+          value: "always"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: spring
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: spring
+        # - name: DB_USER
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: db-secret
+        #       key: username
+        # - name: DB_USER
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: db-secret
+        #       key: username
+        # - name: DB_PASS
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: db-secret
+        #       key: password
+        # - name: DB_NAME
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: db-secret
+        #       key: database
         ports:
         - containerPort: 8081
-        resources: {}
+
+      # - name: cloud-sql-proxy
+        
+      #   image: gcr.io/cloudsql-docker/gce-proxy:1.28.0 # make sure the use the latest version
+      #   command:
+      #     - "/cloud_sql_proxy"
+      #     - "-ip_address_types=PRIVATE"
+      #     - "-instances=taibi-samira:europe-west1:petclinic-instance=tcp:3306"
+      #     - "-credential_file=/secrets/service_account.json"
+      #   securityContext:
+      #     runAsNonRoot: true
+      #   volumeMounts:
+      #   - name: vol-secret
+      #     mountPath: /secrets/
+      #     readOnly: true
+        # resources:
+        #   requests:
+            
+        #     memory: "2Gi"
+          
+        #     cpu:    "1"
+      # volumes:
+      # - name: vol-secret
+      #   secret:
+      #     secretName: sa-secret
       restartPolicy: Always
 status: {}
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: hpa-customers-service
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: customers-service
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50
+
+---
+
+# apiVersion: keda.sh/v1alpha1
+# kind: ScaledObject
+# metadata:
+#   name: cron
+# spec:
+#   scaleTargetRef:
+#     name: customers-service
+#   triggers:
+#   - type: cron
+#     metadata:
+#       timezone: Europe/Paris
+#       start: 0 8 * * *
+#       end: 0 19 * * *
+#       desiredReplicas: "1"
