@@ -31,9 +31,9 @@ spec:
          name: api-gateway
          ports:
           - containerPort: 8080
-         env:
-          - name: SPRING_PROFILES_ACTIVE
-            value: kubernetes
+        #  env:
+        #   - name: SPRING_PROFILES_ACTIVE
+        #     value: kubernetes
          resources: {}
       restartPolicy: Always
 status: {}

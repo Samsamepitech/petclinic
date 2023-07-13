@@ -29,9 +29,9 @@ spec:
           - org.springframework.boot.loader.JarLauncher
         image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-admin-server:latest
         name: admin-server
-        env:
-          - name: SPRING_PROFILES_ACTIVE
-            value: docker,mysql
+        # env:
+        #   - name: SPRING_PROFILES_ACTIVE
+        #     value: docker,mysql
         ports:
         - containerPort: 9090
         resources: {}

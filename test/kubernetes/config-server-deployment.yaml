@@ -22,9 +22,9 @@ spec:
       containers:
       - image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-config-server:latest
         name: config-server
-        env:
-          - name: SPRING_DATASOURCE_URL
-            value: "jdbc:mysql://db:3306/petclinic?user=spring&password=spring&useUnicode=true&characterEncoding=UTF-8"
+        # env:
+        #   - name: SPRING_DATASOURCE_URL
+        #     value: "jdbc:mysql://db:3306/petclinic?user=spring&password=spring&useUnicode=true&characterEncoding=UTF-8"
         ports:
         - containerPort: 8888
         resources: {}
