@@ -21,7 +21,7 @@ spec:
         - name: gcr-json-key
       containers:
       - command:
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-admin-server:latest
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-admin-server:preprod
         name: admin-server
         ports:
         - containerPort: 9090

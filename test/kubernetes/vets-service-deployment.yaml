@@ -20,7 +20,7 @@ spec:
         - name: gcr-json-key
       containers:
       - command:
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-vets-service:latest
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-vets-service:preprod
         name: vets-service
         ports:
         - containerPort: 8083

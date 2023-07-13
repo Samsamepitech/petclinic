@@ -21,7 +21,7 @@ spec:
         - name: gcr-json-key
       containers:
       - command:
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-customers-service:latest
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-customers-service:preprod
         name: customers-service
         ports:
         - containerPort: 8081
