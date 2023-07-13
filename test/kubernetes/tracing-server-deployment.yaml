@@ -21,7 +21,7 @@ spec:
         - name: gcr-json-key
       containers:
       - command:
-        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/openzipkin/zipkin:latest
+        image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/openzipkin/zipkin:prod
         name: tracing-server
         ports:
         - containerPort: 9411

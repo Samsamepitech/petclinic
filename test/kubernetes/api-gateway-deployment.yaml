@@ -20,7 +20,7 @@ spec:
       imagePullSecrets: 
         - name: gcr-json-key
       containers:
-        - image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-api-gateway:latest
+        - image: europe-west1-docker.pkg.dev/certain-purpose-392407/petclinic-microservices/springcommunity/spring-petclinic-api-gateway:prod
           name: api-gateway
           ports:
           - containerPort: 8080
